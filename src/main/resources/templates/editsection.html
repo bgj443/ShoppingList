@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>edititem</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+	<input type="hidden" id="${sectionId}" value="${sectionId}">
+	<h1>Edit Item</h1>
+
+
+		        <form th:object="${Section}" th:action="@{../saveg}" action="#" method="post">				
+				
+				<input type="hidden" id="sectionId"
+				th:field="*{sectionId}" class="form-control" value="" /> 
+				
+				<label for="name">Name</label> <input type="text" id="name"
+				th:field="*{name}" class="form-control" value="" /> 
+				
+				
+				
+		     
+
+                <input type="submit" class="btn btn-success" value="save"  th:action="@{../saveg}"  ></input>              
+		</form>
+</body>
+</html>

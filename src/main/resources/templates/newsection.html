@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shoppinglist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+ <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal"  >Hello [[${#httpServletRequest.remoteUser}]]!</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="/add">Add Item</a>
+    <a class="p-2 text-dark" href="/itemlist">Itemlist</a>
+	<a class="p-2 text-dark" href="/sectionlist">Section list</a>
+  </nav>
+  <form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-xs btn-danger"/>
+  </form>
+</div>
+
+<body>
+	<h1>Add Section</h1>
+	<div>
+		<form th:object="${Section}" th:action="@{saveg}" action="#" method="post">
+		  	<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" />		
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

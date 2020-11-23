@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>>Sectionlist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+</head>
+     <div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+         <a type="submit" th:href="@{/sectionlist?lang=en}" th:utext="#{label.english}"></a>
+         &nbsp;|&nbsp;
+         <a type="submit" th:href="@{/sectionlist?lang=fi}" th:utext="#{label.finnish}"></a>
+         &nbsp;|&nbsp;
+</div>
+	<body>
+	 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  	<h5 class="my-0 mr-md-auto font-weight-normal" th:text="#{label.hello}"></h5>
+  <h5 class="my-0 mr-md-auto font-weight-normal">[[${#httpServletRequest.remoteUser}]]!</h5>
+     <nav class="my-2 my-md-0 mr-md-3">
+  	 <a class="p-2 text-dark" href="/itemlist" th:utext="#{label.shoppinglist}" ></a>
+     <a  sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/addsection" th:utext="#{label.addsection}"></a>
+     </nav>
+     
+    	<form th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-xs btn-danger" th:text="#{label.logout}"></button>
+  		</form>
+</div>
+	
+	
+		<h1 th:text="#{label.sectionlist}"></h1>
+		<table class="table table-striped">
+			<tr>
+			<th>Id</th>
+			<th th:text="#{label.section}"></th>
+			<th sec:authorize="hasAuthority('ADMIN')" th:text="#{label.delete}"></th>
+			<td sec:authorize="hasAuthority('ADMIN')" th:text="#{label.edit}"></th>
+			</tr>
+			<tr th:each="sectionx: ${sections}">
+			<td th:text="${sectionx.sectionId}"></td>
+			<td th:text="${sectionx.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletesection/{id}(id=${sectionx.sectionId})}"
+			 class="btn btn-xs btn-danger" th:text="#{label.delete}"></a></td> 
+			 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editsection/{id}(id=${sectionx.sectionId})}" 
+			 class="alert alert-primary" th:text="#{label.edit}"></a></td>  
+			</tr>
+		</table>
+
+	</body>
+</html>

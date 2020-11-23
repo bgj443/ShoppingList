@@ -1,0 +1,35 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+<title>edititem</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+ 
+
+	<input type="hidden" id="${id}" value="${id}">
+	<h1 th:text="#{label.edititem}"></h1>
+
+
+		        <form th:object="${item}" th:action="@{../save}" action="#" method="post">				
+				<input type="hidden" id="id"
+				th:field="*{id}" class="form-control" value="" /> 
+				
+		     	<label for="itemname" th:text="#{label.itemname}"></label> <input type="text" id="itemname"
+				th:field="*{itemname}" class="form-control" value="" /> 
+				
+				<label for="sectionlist" th:text="#{label.section}"></label>
+				<select id="sectionlist" th:field="*{section}" class="form-control">
+				<option th:each="section: ${sections}"
+						th:value="${section.sectionId}"
+						th:text="${section.name}"></option>
+				</select>
+
+                <input type="submit" class="btn btn-success" value="save" th:text="#{label.save}" th:action="@{../save}"></input>              
+		</form>
+</body>
+</html>
